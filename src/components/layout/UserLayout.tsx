@@ -25,7 +25,7 @@ export default function UserLayout({ children }: { children: ReactNode }) {
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img src="https://randomuser.me/api/portraits/women/88.jpg" />
+                            <img src="/user-1.jpg" alt="user" />
                         </div>
                     </label>
                     <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">

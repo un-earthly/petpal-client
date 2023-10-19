@@ -1,30 +1,31 @@
 import Link from "next/link";
 import UserLayout from "../src/components/layout/UserLayout";
+import Image from "next/image";
 
 export default function Home() {
   const services = [
     {
-      image: "https://t4.ftcdn.net/jpg/02/33/27/49/360_F_233274969_05yF6n373UklRywbiScD9ylTF1d6jqnZ.jpg",
+      image: "/dog-walk.jpg",
       title: 'Dog Walking',
       description: 'Give your dog the exercise they need with our professional dog walking services.',
     },
     {
-      image: "https://storage.googleapis.com/petbacker/images/blog/2017/pets-on-holiday.jpg",
+      image: "/pet-boarding.jpg",
       title: 'Pet Boarding',
       description: 'Leave your pets in safe hands with our comfortable and secure pet boarding facilities.',
     },
     {
-      image: "https://st.depositphotos.com/1177973/1392/i/450/depositphotos_13924962-stock-photo-grooming-the-yorkshire-terrier-isolated.jpg",
+      image: "/pet-grooming.jpg",
       title: 'Pet Grooming',
       description: 'Keep your pets looking their best with our grooming and spa treatments.',
     },
     {
-      image: "https://thumbs.dreamstime.com/b/pet-sitter-29050298.jpg",
+      image: "/pet-sitting.webp",
       title: 'Pet Sitting',
       description: `Trustworthy pet sitters to care for your pets when you're away from home.`,
     },
     {
-      image: "https://thumbs.dreamstime.com/b/pet-sitter-29050298.jpg",
+      image: "/pet-sitting.webp",
       title: 'Pet Sitting',
       description: `Trustworthy pet sitters to care for your pets when you're away from home.`,
     },
@@ -64,17 +65,17 @@ export default function Home() {
   const clientReviews = [
     {
       name: 'linda sneakers',
-      image: "https://randomuser.me/api/portraits/women/88.jpg",
+      image: "/user-1.jpg",
       comment: 'I couldn’t be happier with the pet care services provided by PetPal. My dog is always excited for his daily walks!',
     },
     {
       name: 'Jane Smith',
-      image: "https://randomuser.me/api/portraits/women/80.jpg",
+      image: "/user-1.jpg",
       comment: 'PetPals pet sitting service allowed me to travel worry- free, knowing my cats were in good hands.Highly recommended!',
     },
     {
       name: 'Bob Johnson',
-      image: "https://randomuser.me/api/portraits/men/88.jpg",
+      image: "/user-3.jpg",
 
       comment: 'The grooming services at PetPal keep my dog looking amazing. The staff is friendly and professional.',
     },
@@ -117,11 +118,11 @@ export default function Home() {
     <UserLayout>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content lg:w-8/12 mx-auto flex-col lg:flex-row-reverse">
-          <img src="https://t4.ftcdn.net/jpg/01/99/00/79/360_F_199007925_NolyRdRrdYqUAGdVZV38P4WX8pYfBaRP.jpg" className="max-w-sm rounded-lg shadow-2xl" />
+          <Image alt={"banner"} height={400} width={400} src="/banner-image.jpg" className="max-w-sm rounded-lg shadow-2xl" />
           <div>
             <h1 className="text-5xl font-bold">Welcome to PetPal</h1>
             <p className="py-6">
-              Your trusted source for all things pets. Whether you have a furry friend, a feathery companion, or a scaly buddy, we're here to provide you with the best pet care information and services.
+              Your trusted source for all things pets. Whether you have a furry friend, a feathery companion, or a scaly buddy, were here to provide you with the best pet care information and services.
             </p>
             <Link href="/services" className="btn btn-accent">Checkout Services</Link>
           </div>
@@ -134,8 +135,8 @@ export default function Home() {
           <h2 className="text-2xl font-semibold text-center my-3 ">Available Pet Services</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, index) => (
-              <div className="card h-96 group bg-base-100 shadow-xl image-full">
-                <figure><img className="group-hover:scale-125 duration-300" src={service.image} alt="Shoes" /></figure>
+              <div key={index} className="card h-96 overflow-hidden group bg-base-100 shadow-xl image-full">
+                <figure><Image fill className="group-hover:scale-125 duration-300" src={service.image} alt="Shoes" /></figure>
                 <div className="card-body">
                   <h2 className="card-title">{service.title}</h2>
                   <p>{service.description}</p>
@@ -171,7 +172,7 @@ export default function Home() {
           <h2 className="text-2xl font-semibold">About PetPal</h2>
           <p className="mt-4 text-gray-600">
             PetPal is dedicated to providing the best care and services for your beloved pets. We are passionate about ensuring the well-being of all animals and offer a wide range of pet-related services and events.
-            From dog walking to pet grooming, and from pet adoption events to educational workshops, we're here to ensure that your pets receive the love and care they deserve. Join our growing community of pet enthusiasts today!
+            From dog walking to pet grooming, and from pet adoption events to educational workshops, were here to ensure that your pets receive the love and care they deserve. Join our growing community of pet enthusiasts today!
 
           </p>
           <Link href="/about">
@@ -185,8 +186,8 @@ export default function Home() {
           <h2 className="text-2xl font-semibold my-5">Client Reviews</h2>
           <div className="grid gap-6 md:grid-cols-2 mt-4 lg:grid-cols-3">
             {clientReviews.map((review, index) => (
-              <div key={index} className="bg-white relative rounded-lg p-5 shadow-md">
-                <img src={review.image}  className="absolute h-10 -top-2 w-10 rounded-full ring-1 right-1/2 ring-blue-400 " alt="" />
+              <div key={index} className="bg-white rounded-lg p-5 shadow-md">
+                <Image height={50} width={50} src={review.image} className="mx-auto h-10 -top-2 w-10 rounded-full ring-1 right-1/2 ring-blue-400" alt="" />
                 <div className="my-5">
                   <p className="text-gray-600">{review.comment}</p>
                   <p className="text-gray-800 mt-2">- {review.name}</p>
