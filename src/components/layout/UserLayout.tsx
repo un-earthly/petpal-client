@@ -1,27 +1,39 @@
 import Link from 'next/link'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 import Footer from '../Footer'
 
 export default function UserLayout({ children }: { children: ReactNode }) {
-    const user =true
-    const menuLinks = <>
+    const user = true
+    const [serchTerm, setSearchTerm] = useState("")
+    const handleSearch = () => { }
+    const menuLinks = <div className='flex items-center justify-center'>
         <li>
-            <Link href="/">Home</Link>
+            <Link href="/about">About</Link>
         </li>
         <li>
-            <Link href="/">Home</Link>
-        </li>
-        <li>
-            <Link href="/">Home</Link>
-        </li>
-        <li>
-            <Link href="/">Home</Link>
+            <Link href="/services">Services</Link>
         </li>
         {user ?
             <>
-                <li>
-                    <Link href="/dashboard">Dashboard</Link>
-                </li>
+                <div className="flex-none">
+                    <div className="dropdown dropdown-end">
+                        <label tabIndex={0} className="btn btn-ghost btn-circle">
+                            <div className="indicator">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                <span className="badge badge-sm indicator-item">8</span>
+                            </div>
+                        </label>
+                        <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
+                            <div className="card-body">
+                                <span className="font-bold text-lg">8 Items</span>
+                                <span className="text-info">Subtotal: $999</span>
+                                <Link href="/cart" className="card-actions">
+                                    <button className="btn btn-accent btn-sm btn-block">View cart</button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
@@ -44,7 +56,7 @@ export default function UserLayout({ children }: { children: ReactNode }) {
                 </li>
             </>
         }
-    </>
+    </div>
     return (
         <div className="drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -56,6 +68,14 @@ export default function UserLayout({ children }: { children: ReactNode }) {
                         </label>
                     </div>
                     <Link href="/home" className="flex-1 px-2 text-xl font-bold mx-2">Pet Pal</Link>
+                    <div className="form-control">
+                        <div className="input-group">
+                            <input value={serchTerm} onChange={e => setSearchTerm(e.target.value)} type="text" placeholder="Search…" className="input focus:outline-none input-bordered" />
+                            <button onClick={handleSearch} className="btn btn-square">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                            </button>
+                        </div>
+                    </div>
                     <div className="flex-none hidden lg:block">
                         <ul className="menu menu-horizontal">
                             {menuLinks}
@@ -76,4 +96,3 @@ export default function UserLayout({ children }: { children: ReactNode }) {
         </div>
     )
 }
-
