@@ -1,43 +1,9 @@
-import UserLayout from '@/src/components/layout/UserLayout';
-import Image from 'next/image';
-import Link from 'next/link';
+import ServiceCard from '@/src/components/ServiceCard';
+import UserLayout from '@/src/layout/UserLayout';
 import React from 'react'
-
+import { servicesData } from "./data.js"
 export default function services() {
-    const services = [
-        {
-            image: "/dog-walk.jpg",
-            title: 'Dog Walking',
-            description: 'Give your dog the exercise they need with our professional dog walking services.',
-            pricing: "5"
-        },
-        {
-            image: "/pet-boarding.jpg",
-            title: 'Pet Boarding',
-            description: 'Leave your pets in safe hands with our comfortable and secure pet boarding facilities.',
-            pricing: "25"
 
-        },
-        {
-            image: "/pet-grooming.jpg",
-            title: 'Pet Grooming',
-            description: 'Keep your pets looking their best with our grooming and spa treatments.',
-            pricing: "15"
-
-        },
-        {
-            image: "/pet-sitting.webp",
-            title: 'Pet Sitting',
-            description: `Trustworthy pet sitters to care for your pets when you're away from home.`,
-            pricing: "2"
-        },
-        {
-            image: "/pet-sitting.webp",
-            title: 'Pet Sitting',
-            description: `Trustworthy pet sitters to care for your pets when you're away from home.`,
-            pricing: "10"
-        },
-    ];
     return (
         <UserLayout>
 
@@ -56,25 +22,11 @@ export default function services() {
                 <div className="container mx-auto">
                     <h2 className="text-2xl font-semibold text-center my-10 ">Available Pet Services</h2>
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {services.map((service, index) => (
-                            <div key={index} className="card h-96 overflow-hidden group bg-base-100 shadow-xl image-full">
-                                <figure>
-                                    <Image fill className="group-hover:scale-125 duration-300" src={service.image} alt="Shoes" />
-                                </figure>
-                                <div className="card-body">
-                                    <div className='flex-1'>
-                                        <h2 className="card-title">{service.title}</h2>
-                                        <p>{service.description}</p>
-                                        <p>${service.pricing} / Per hour</p>
-                                    </div>
-                                    <div className="card-actions justify-end">
-                                        <button className="btn btn-accent font-bold duration-200 btn-outline rounded-full">Book Now</button>
-                                    </div>
-                                </div>
-                            </div>
+                        {servicesData.map((service, index) => (
+                            <ServiceCard service={service} key={index} />
                         ))}
                     </div>
-                      </div>
+                </div>
             </section>
         </UserLayout>
 

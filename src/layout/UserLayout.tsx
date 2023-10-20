@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React, { ReactNode, useState } from 'react'
-import Footer from '../Footer'
+import Footer from '../components/Footer'
 
 export default function UserLayout({ children }: { children: ReactNode }) {
     const user = true
@@ -67,7 +67,7 @@ export default function UserLayout({ children }: { children: ReactNode }) {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </label>
                     </div>
-                    <Link href="/home" className="flex-1 px-2 text-xl font-bold mx-2">Pet Pal</Link>
+                    <Link href="/" className="flex-1 px-2 text-xl font-bold mx-2">Pet Pal</Link>
                     <div className="form-control">
                         <div className="input-group">
                             <input value={serchTerm} onChange={e => setSearchTerm(e.target.value)} type="text" placeholder="Search…" className="input focus:outline-none input-bordered" />
