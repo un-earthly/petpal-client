@@ -40,7 +40,7 @@ export default function UserLayout({ children }: { children: ReactNode }) {
                             <img src="/user-1.jpg" alt="user" />
                         </div>
                     </label>
-                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                    <ul tabIndex={0} className="mt-3 z-[1] p-4 space-y-3 shadow menu menu-sm dropdown-content bg-base-100 rounded w-52">
                         <li><Link href="/dashboard">Dashboard</Link></li>
                         <li><button className='btn btn-sm btn-error hover:text-error'>Logout</button></li>
                     </ul>
