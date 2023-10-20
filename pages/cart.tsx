@@ -14,7 +14,7 @@ export default function cart() {
 
 
     const totalAmount = serviceData
-        ? serviceData.reduce((total, service) => total + parseFloat(service.pricing), 0)
+        ? serviceData.reduce((total, service) => total + parseFloat(service.price), 0)
         : 0;
     return (
         <UserLayout>
@@ -35,7 +35,7 @@ export default function cart() {
                                                 <p className="text-sm ">{service.selectedTime}</p>
                                             </div>
                                             <div className="text-right">
-                                                <p className="text-lg font-semibold">{service.pricing}$</p>
+                                                <p className="text-lg font-semibold">{service.price}$</p>
                                             </div>
                                         </div>
                                         <div className="flex text-sm divide-x">
@@ -66,12 +66,12 @@ export default function cart() {
                     </p>
                 </div>
                 <div className="flex justify-end space-x-4">
-                    <button type="button" className="px-6 py-2 border rounded-md duration-200">Back {" "}
+                    <Link href="/services" className="px-6 py-2 border rounded-md duration-200">Back {" "}
                         <span className="sr-only sm:not-sr-only">to shop</span>
-                    </button>
-                    <button type="button" className="px-6 py-2 border rounded-md hover:bg-accent border-accent duration-200">
-                        <span className="sr-only sm:not-sr-only">Continue to</span>Checkout
-                    </button>
+                    </Link>
+                    <Link href="/checkout" className="px-6 py-2 border rounded-md hover:bg-accent border-accent duration-200">
+                        <span className="sr-only sm:not-sr-only">Continue to {" "}</span>Checkout
+                    </Link>
                 </div>
             </div>
         </UserLayout>
