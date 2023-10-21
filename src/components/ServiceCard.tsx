@@ -1,13 +1,13 @@
 import Image from 'next/image';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import SchedulingModal from './SchedulingModal';
 
-export default function ServiceCard({ service }: any) {
+export default function ServiceCard({ service }: { service: any }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const sampleAvailableTimeSlots = [
         { time: '08:00 AM', isAvailable: true },
         { time: '09:00 AM', isAvailable: true },
-        { time: '10:00 AM', isAvailable: false }, 
+        { time: '10:00 AM', isAvailable: false },
         { time: '11:00 AM', isAvailable: true },
         { time: '01:00 PM', isAvailable: true },
         { time: '02:00 PM', isAvailable: true },

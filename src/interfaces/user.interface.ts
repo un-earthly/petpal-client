@@ -21,6 +21,7 @@ interface IUser {
     bookedServicesId: string[];
     perticipatingEvents: string[];
     notificationsEnabled: boolean;
+    gender: string;
 }
 
 

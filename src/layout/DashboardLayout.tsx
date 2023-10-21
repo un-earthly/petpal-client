@@ -7,16 +7,16 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Dashboard</li>
         </Link>
         <Link href="/dashboard/bookings">
-            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Bookings</li>
+            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Bookings</li>
         </Link>
         <Link href="/dashboard/pets">
-            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Pets</li>
+            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Pets</li>
         </Link>
         <Link href="/dashboard/profile">
-            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Profile</li>
+            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Profile</li>
         </Link>
         <Link href="/dashboard/events">
-            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Events</li>
+            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Events</li>
         </Link>
     </>
     return (
