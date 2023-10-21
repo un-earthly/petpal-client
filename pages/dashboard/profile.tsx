@@ -9,8 +9,6 @@ const ProfileForm = () => {
     email: 'example@email.com',
     password: 'password123',
     name: 'John Doe',
-    role: 'User',
-    profileImage: 'https://example.com/profile-image.jpg',
     phoneNumber: '123-456-7890',
     address: '123 Main St, City',
     bio: 'I love pets!',
@@ -21,17 +19,16 @@ const ProfileForm = () => {
     email: Yup.string().email('Invalid email address').required('Email is required'),
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
     name: Yup.string().required('Name is required'),
-    role: Yup.string().required('Role is required'),
     phoneNumber: Yup.string().required('Phone number is required'),
     address: Yup.string().required('Address is required'),
     bio: Yup.string(),
     gender: Yup.string().required('Gender is required'),
   });
 
-  const handleSubmit = (values:any) => {
-    console.log('Form submitted with values:', values);
+  const handleSubmit = (values: any) => {
+    console.log('Form submitted with values:', { ...values, profileImage: url });
   };
-  function handleOnUpload(error:any, result:any, widget:any) {
+  function handleOnUpload(error: any, result: any, widget: any) {
     if (error) {
       updateError(error);
       widget.close({
@@ -63,7 +60,7 @@ const ProfileForm = () => {
                   type="text"
                   id="email"
                   name="email"
-                  className="input"
+                  className="input bg-gray-100"
                 />
                 <ErrorMessage name="email" component="div" className="text-red-600" />
               </div>
@@ -75,22 +72,12 @@ const ProfileForm = () => {
                   type="password"
                   id="password"
                   name="password"
-                  className="input"
+                  className="input bg-gray-100"
+
                 />
                 <ErrorMessage name="password" component="div" className="text-red-600" />
               </div>
-              <div className="form-control">
-                <label htmlFor="email" className="label">
-                  Email
-                </label>
-                <Field
-                  type="text"
-                  id="email"
-                  name="email"
-                  className="input"
-                />
-                <ErrorMessage name="email" component="div" className="text-red-600" />
-              </div>
+
               <div className="form-control">
                 <label htmlFor="email" className="label">
                   name
@@ -99,25 +86,12 @@ const ProfileForm = () => {
                   type="text"
                   id="name"
                   name="name"
-                  className="input"
+                  className="input bg-gray-100"
+
                 />
                 <ErrorMessage name="name" component="div" className="text-red-600" />
               </div>
-              <div className="form-control">
-                <label htmlFor="role" className="label">
-                  Role
-                </label>
-                <Field
-                  as="select"
-                  id="role"
-                  name="role"
-                  className="input"
-                >
-                  <option value="User">User</option>
-                  <option value="Admin">Admin</option>
-                </Field>
-                <ErrorMessage name="role" component="div" className="text-red-600" />
-              </div>
+
 
               <div className="form-control">
                 <label htmlFor="phoneNumber" className="label">
@@ -127,7 +101,8 @@ const ProfileForm = () => {
                   type="tel"
                   id="phoneNumber"
                   name="phoneNumber"
-                  className="input"
+                  className="input bg-gray-100"
+
                 />
                 <ErrorMessage name="phoneNumber" component="div" className="text-red-600" />
               </div>
@@ -138,8 +113,8 @@ const ProfileForm = () => {
                 <Field
                   type="text"
                   id="address"
-                  name="address"
-                  className="input"
+                  name="address" className="input bg-gray-100"
+
                 />
                 <ErrorMessage name="address" component="div" className="text-red-600" />
               </div>
@@ -152,7 +127,8 @@ const ProfileForm = () => {
                   as="textarea"
                   id="bio"
                   name="bio"
-                  className="input"
+                  className="textarea bg-gray-100"
+
                 />
                 <ErrorMessage name="bio" component="div" className="text-red-600" />
               </div>
@@ -173,17 +149,10 @@ const ProfileForm = () => {
                 <ErrorMessage name="gender" component="div" className="text-red-600" />
               </div>
 
-              {/* <div className="form-control">
-                <label htmlFor="phoneNumber" className="label">
-                 Profile Image
-                </label>
-                <input type="file" className="file-input file-input-bordered w-full max-w-xs"onChange={e=>console.log(e.target.files)} />
-                <ErrorMessage name="phoneNumber" component="div" className="text-red-600" />
-              </div> */}
 
               <UploadWidget onUpload={handleOnUpload}>
-                {({ open }:any) => {
-                  function handleOnClick(e:any) {
+                {({ open }: any) => {
+                  function handleOnClick(e: any) {
                     e.preventDefault();
                     open();
                   }
@@ -193,8 +162,9 @@ const ProfileForm = () => {
                         !url && <button className='btn btn-accent' onClick={handleOnClick}>
                           Upload an Image
                         </button>
-                     }
-                      {url && <input disabled type="text" className='input' value={url} />}
+                      }
+                      {url && <img alt="profile" className='rounded-full h-20 block mx-auto w-20' src={url} />}
+                      {url && <input disabled type="text" className='input w-full' value={url} />}
                       {error && <p className='text-error'>{error}</p>}
                     </div>
                   )
