@@ -20,7 +20,6 @@ interface IUser {
     reviews: string[];
     bookedServicesId: string[];
     perticipatingEvents: string[];
-    notificationsEnabled: boolean;
     gender: string;
 }
 
