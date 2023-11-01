@@ -1,5 +1,6 @@
+import Loading from '@/pages/loading'
 import Link from 'next/link'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, Suspense } from 'react'
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
     const links = <>
@@ -31,7 +32,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     </label>
                 </div>
 
-                {children}
+                <Suspense fallback={<Loading />}>
+                    {children}
+                </Suspense>
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>

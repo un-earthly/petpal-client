@@ -15,11 +15,11 @@ interface IUser {
     phoneNumber: string;
     address: string;
     bio: string;
-    pets: string[];
-    articleId: string[];
-    reviews: string[];
-    bookedServicesId: string[];
-    perticipatingEvents: string[];
+    petIds: string[];
+    articleIds: string[];
+    reviewIds: string[];
+    bookedServicesIds: string[];
+    perticipatingEventsIds: string[];
     gender: string;
 }
 

@@ -1,9 +1,10 @@
 import Link from 'next/link'
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, Suspense, useState } from 'react'
 import Footer from '../components/Footer'
+import Loading from '@/pages/loading'
 
 export default function UserLayout({ children }: { children: ReactNode }) {
-    const user = true
+    const user = false
     const [serchTerm, setSearchTerm] = useState("")
     const handleSearch = () => { }
     const menuLinks = <div className='flex items-center justify-center'>
@@ -83,7 +84,9 @@ export default function UserLayout({ children }: { children: ReactNode }) {
                     </div>
                 </div>
                 <div className="min-h-screen">
-                    {children}
+                    <Suspense fallback={<Loading />}>
+                        {children}
+                    </Suspense>
                 </div>
                 <Footer />
             </div>
