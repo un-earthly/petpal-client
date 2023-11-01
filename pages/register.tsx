@@ -1,18 +1,45 @@
+import { registerApi } from '@/src/route';
+import { setToken } from '@/src/utils/useLocalStorage';
+import axios from "axios";
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { FormEvent, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState(false);
+    const [isError, setIsError] = useState("");
+    const navigate = useRouter();
     const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
         setIsLoading(true)
         e.preventDefault();
-    };
+        if (!name || !email || !password) {
+            setIsError("Please Check Fillup The Form")
+            setIsLoading(false)
+            return
+        }
+        axios.post(registerApi, {
+            name,
+            email,
+            password,
+            role: "USER"
+        })
+            .then(res => {
+                setToken(res.data.data.token)
+                toast.success(res.data.data.message)
+                navigate.push("/dashboard")
+            })
+            .catch(err => {
+                setIsError(err.response.data.errorMessages);
+            })
+            .finally(() => setIsLoading(false))
+    }
 
     return (
+
 
         <div className="flex min-h-screen items-center bg-gray-100 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -29,8 +56,11 @@ const Signup = () => {
 
                         disabled={isLoading}
                         placeholder="Name"
-                        className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:outline-none focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        value={name} onChange={e => setName(e.target.value)} />
+                        className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:outline-none focus:ring-cyan-600 sm:text-sm sm:leading-6"
+                        value={name} onChange={e => setName(e.target.value)}
+                        required
+
+                    />
 
                     <input
                         type="text"
@@ -38,7 +68,8 @@ const Signup = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         disabled={isLoading}
-                        className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:outline-none focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        required
+                        className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:outline-none focus:ring-cyan-600 sm:text-sm sm:leading-6"
 
                     />
                     <input
@@ -47,29 +78,32 @@ const Signup = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         disabled={isLoading}
-                        className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:outline-none focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  focus:outline-none focus:ring-cyan-600 sm:text-sm sm:leading-6"
+                        required
 
-                    />
+                    />  {isError && (
+                        <p style={{ color: 'red' }}>
+                            {isError}
+                        </p>
+                    )}
                     <button type="submit"
-                        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-
+                        className='btn btn-accent w-full btn-sm rounded'
                         disabled={isLoading}>
                         {isLoading ? 'Registering...' : 'Register'}
                     </button>
                 </form>
-                {isError && (
-                    <p style={{ color: 'red' }}>
-                        Registration failed. Please check Inputs.
-                    </p>
-                )}
+
             </div>
 
-            <p className="mt-10 text-center text-sm text-gray-500">
+            <p className="mt-5 text-center text-sm text-gray-500">
                 Already a member?{' '}
-                <Link href="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                <Link href="/login" className="font-semibold leading-6 text-cyan-500 hover:text-cyan-600">
                     Start Here
                 </Link>
             </p>
+
+            {/* <div className="divider w-1/3 mx-auto">OR</div> */}
+            {/* <SocialSignIn /> */}
         </div>
     );
 };
