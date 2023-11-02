@@ -5,10 +5,33 @@ import ServiceCard from "@/src/components/ServiceCard";
 import { servicesData } from "./data.js"
 import Tip from "@/src/components/Tip";
 import SuccessStory from "@/src/components/SuccessStory";
+import { useState } from "react"
+interface FaqItem {
+  question: string;
+  answer: string;
+};
 
 export default function Home() {
 
 
+  const faqData: FaqItem[] = [
+    {
+      question: 'What pet services does PetPal offer?',
+      answer: 'PetPal offers a range of services, including pet grooming, pet boarding, dog walking, pet sitting, and more. You can find all the details on our Services page.'
+    },
+    {
+      question: 'Do you organize pet events?',
+      answer: 'Yes, PetPal organizes various pet events throughout the year. You can check our Events page to stay updated on upcoming events and activities for your pets.'
+    },
+    {
+      question: 'How can I book a pet service?',
+      answer: 'Booking a pet service is easy. Simply visit our Services page, select the service you need, and follow the booking instructions provided. You can also contact us for any assistance.'
+    },
+    {
+      question: 'Are your pet events open to the public?',
+      answer: 'Most of our pet events are open to the public. However, some events may require pre-registration or have limited capacity. Be sure to check the event details for any specific requirements.'
+    },
+  ];
   const upcomingServices = [
     {
       title: "Cat Potty Training",
@@ -94,6 +117,11 @@ export default function Home() {
       story: 'Max, the energetic pup, overcame his fears and found love with a compassionate family. Hes now thriving and spreading joy!',
     },
   ];
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const handleToggle = (index: number) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
   return (
     <UserLayout>
       <div className="flex items-center justify-center min-h-screen bg-base-200">
@@ -186,7 +214,27 @@ export default function Home() {
         </div>
       </section>
 
-
+      <section className="py-12">
+        <div className="lg:max-w-[1280px] mx-auto">
+          <h2 className="text-3xl font-semibold text-center mb-8">FAQs</h2>
+          <div className="space-y-4">
+            {faqData.map((item, index) => (
+              <div key={index} className="border p-4 rounded-lg shadow-md">
+                <button
+                  className="flex items-center justify-between w-full"
+                  onClick={() => handleToggle(index)}
+                >
+                  <span className="text-lg font-medium">{item.question}</span>
+                  <span className="text-indigo-500">{activeIndex === index ? '-' : '+'}</span>
+                </button>
+                {activeIndex === index && (
+                  <p className="text-gray-600 mt-2">{item.answer}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="py-20 bg-base-200">
         <div className="lg:max-w-[1280px] mx-auto">
@@ -217,7 +265,7 @@ export default function Home() {
         <div className="lg:max-w-[1280px] px-5 py-24 mx-auto flex flex-wrap items-center">
           <div className="lg:max-w-xl md:w-1/2 md:pr-16 lg:pr-0 pr-0">
             <h1 className="title-font font-medium text-4xl text-gray-900">
-              Welcome to Pet Services Hub
+              Welcome to Petpal
             </h1>
             <p className="leading-relaxed mt-4">
               Your one-stop destination for pet care, exciting pet events, and volunteer opportunities to make a difference in the lives of our furry friends.

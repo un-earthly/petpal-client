@@ -14,7 +14,7 @@ export default function cart() {
 
 
     const totalAmount = serviceData
-        ? serviceData.reduce((total, service) => total + parseFloat(service.price), 0)
+        ? serviceData.reduce((total, service) => total + parseFloat(service.pricing), 0)
         : 0;
     return (
         <UserLayout>
@@ -35,7 +35,7 @@ export default function cart() {
                                                 <p className="text-sm ">{service.selectedTime}</p>
                                             </div>
                                             <div className="text-right">
-                                                <p className="text-lg font-semibold">{service.price}$</p>
+                                                <p className="text-lg font-semibold">{service.pricing}$</p>
                                             </div>
                                         </div>
                                         <div className="flex text-sm divide-x">
@@ -62,7 +62,7 @@ export default function cart() {
                 </ul>
                 <div className="space-y-1 text-right">
                     <p>Total amount:
-                        <span className="font-semibold">{totalAmount} €</span>
+                        <span className="font-semibold">{totalAmount} $</span>
                     </p>
                 </div>
                 <div className="flex justify-end space-x-4">

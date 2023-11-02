@@ -11,7 +11,7 @@ interface IService {
     description: string;
     category: string;
     image: string;
-    price: string;
+    pricing: string;
     selectedTime: string;
     availableTimeSlots: ITimeSlot[];
 }

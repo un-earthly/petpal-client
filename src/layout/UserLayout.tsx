@@ -5,16 +5,19 @@ import Loading from '@/pages/loading'
 import { useRouter } from 'next/router'
 import { getItem, removeItem } from '../utils/useLocalStorage'
 import { useAuth } from '../context/authContext'
+import IService from '../interfaces/service.interface'
 
 export default function UserLayout({ children }: { children: ReactNode }) {
-    const { user, login, logout } = useAuth(); 
+    const { user } = useAuth(); 
     const navigator = useRouter()
     const [serchTerm, setSearchTerm] = useState("")
     const cartItems = useMemo(() => {
-        const cartData = getItem('cart');
+        const cartData = getItem('service');
         return cartData ? JSON.parse(cartData) : [];
     }, []);
-    
+    const totalAmount = cartItems
+        ? cartItems.reduce((total:number, service:IService) => total + parseFloat(service.pricing), 0)
+        : 0;
     const handleSearch = () => { }
     const handleLogout = () => {
         removeItem("user");
@@ -40,7 +43,7 @@ export default function UserLayout({ children }: { children: ReactNode }) {
                         <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
                             <div className="card-body">
                                 <span className="font-bold text-lg">{cartItems.length} Items</span>
-                                <span className="text-info">Subtotal: $999</span>
+                                <span className="text-info">Subtotal: ${totalAmount}</span>
                                 <Link href="/cart" className="card-actions">
                                     <button className="btn btn-accent btn-sm btn-block">View cart</button>
                                 </Link>
@@ -81,7 +84,7 @@ export default function UserLayout({ children }: { children: ReactNode }) {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </label>
                     </div>
-                    <Link href="/" className="flex-1 px-2 text-xl font-bold mx-2">Pet Pal</Link>
+                    <Link href="/" className="flex-1 px-2 text-xl font-bold mx-2">PetPal</Link>
                     <div className="form-control">
                         <div className="input-group">
                             <input value={serchTerm} onChange={e => setSearchTerm(e.target.value)} type="text" placeholder="Search…" className="input focus:outline-none input-bordered" />

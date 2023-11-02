@@ -51,7 +51,8 @@ const CheckoutForm: React.FC = () => {
                         />
 
                         <input
-                            type="text"
+                            type="number"
+                            maxLength={19}
                             id="cardNumber"
                             name="cardNumber"
                             placeholder='Card Number'
