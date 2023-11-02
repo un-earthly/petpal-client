@@ -55,7 +55,7 @@ export default function cart() {
                             </li>
                         ))) : <div>
                         <h1 className="text-xl text-red-500 ">Please add some services</h1>
-                        <Link href="/services" className='btn btn-info'>Add Some</Link>
+                        <Link href="/services" className='btn btn-accent mt-4'>Add Some</Link>
                     </div>}
 
 

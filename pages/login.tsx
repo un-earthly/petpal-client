@@ -1,3 +1,4 @@
+import { useAuth } from '@/src/context/authContext';
 import { loginApi } from '@/src/route';
 import { setItem } from '@/src/utils/useLocalStorage';
 import axios from 'axios';
@@ -9,29 +10,27 @@ import { toast } from 'react-toastify';
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState(false);
     const navigate = useRouter();
-
+    const { login, setLoading, setError, isLoading, isError } = useAuth();
     const handleLogin = async (e: FormEvent) => {
-        setIsLoading(true)
+        setLoading(true)
         e.preventDefault();
         axios.post(loginApi, {
             email,
             password,
         })
             .then(res => {
-                console.log([ ])
-                setItem("user", JSON.stringify({ user: [...res.data.data.user, res.data.data.token] }))
+                setItem("user", JSON.stringify({ user: [res.data.data.user, res.data.data.token] }))
                 toast.success(res.data.data.message)
+                login(res.data.data.user);
                 navigate.push("/dashboard")
             })
             .catch(err => {
-                // setIsError(err.response.data.errorMessages);
+                setError(err.response.data.errorMessages);
                 console.log(err)
 
             })
-            .finally(() => setIsLoading(false))
+            .finally(() => setLoading(false))
     };
 
     return (

@@ -4,36 +4,37 @@ import { servicesData } from '../data';
 import ServiceCard from '@/src/components/ServiceCard';
 
 export default function dashboard() {
-    const notifications = [
-        {
-            id: 1,
-            title: 'New Message',
-            content: 'You have a new message from your pet sitter.',
-            type: "error"
-        },
-        {
-            id: 2,
-            title: 'Booking Confirmation',
-            content: 'Your pet grooming appointment has been confirmed.',
-            type: "success"
-        },
-        {
-            id: 2,
-            title: 'Booking Confirmation',
-            content: 'Your pet grooming appointment has been confirmed.',
-            type: "info"
-        },
-        {
-            id: 2,
-            title: 'Booking Confirmation',
-            content: 'Your pet grooming appointment has been confirmed.',
-            type: "warning"
-        },
-    ];
+    // const notifications = [
+    //     {
+    //         id: 1,
+    //         title: 'New Message',
+    //         content: 'You have a new message from your pet sitter.',
+    //         type: "error"
+    //     },
+    //     {
+    //         id: 2,
+    //         title: 'Booking Confirmation',
+    //         content: 'Your pet grooming appointment has been confirmed.',
+    //         type: "success"
+    //     },
+    //     {
+    //         id: 2,
+    //         title: 'Booking Confirmation',
+    //         content: 'Your pet grooming appointment has been confirmed.',
+    //         type: "info"
+    //     },
+    //     {
+    //         id: 2,
+    //         title: 'Booking Confirmation',
+    //         content: 'Your pet grooming appointment has been confirmed.',
+    //         type: "warning"
+    //     },
+    // ];
     const user = { name: "jane doe", gender: "female" }
 
     return (
         <DashboardLayout>
+            
             <div className='bg-gray-50'>
 
                 <section className="text-gray-600 body-font pt-10">
@@ -89,7 +90,7 @@ export default function dashboard() {
                     </div>
                 </div>
 
-                <div className="w-full bg-gray-100 p-4 mb-4">
+                {/* <div className="w-full bg-gray-100 p-4 mb-4">
                     <h2 className="text-xl font-bold mb-4 text-center">Notifications</h2>
                     <div className="space-y-4 w-2/3 mx-auto">
                         {notifications.map((notification) => (
@@ -123,7 +124,7 @@ export default function dashboard() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div> */}
             </div>
 
         </DashboardLayout>

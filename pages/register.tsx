@@ -1,3 +1,4 @@
+import { useAuth } from '@/src/context/authContext';
 import { registerApi } from '@/src/route';
 import { setItem } from '@/src/utils/useLocalStorage';
 import axios from "axios";
@@ -10,15 +11,14 @@ const Signup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState("");
+    const { login, setError, setLoading, isLoading , isError} = useAuth();
     const navigate = useRouter();
     const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
-        setIsLoading(true)
+        setLoading(true)
         e.preventDefault();
         if (!name || !email || !password) {
-            setIsError("Please Check Fillup The Form")
-            setIsLoading(false)
+            setError("Please Check Fillup The Form")
+            setLoading(false)
             return
         }
         axios.post(registerApi, {
@@ -28,15 +28,16 @@ const Signup = () => {
             role: "USER"
         })
             .then(res => {
-                setItem("user", JSON.stringify({ user: [...res.data.data.data, res.data.data.token] }))
+                setItem("user", JSON.stringify({ user: [res.data.data.user, res.data.data.token] }))
+                login(res.data.data.user);
                 toast.success(res.data.data.message)
                 navigate.push("/dashboard")
             })
             .catch(err => {
-                // setIsError(err.response.data.errorMessages);
+                setError(err.response.data.errorMessages);
                 console.log(err)
             })
-            .finally(() => setIsLoading(false))
+            .finally(() => setLoading(false))
     }
 
     return (

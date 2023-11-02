@@ -3,9 +3,13 @@ import Link from 'next/link'
 import React, { ReactNode, Suspense } from 'react'
 import { useRouter } from 'next/router'
 import { removeItem } from '../utils/useLocalStorage'
+import { useAuth } from '../context/authContext'
+import PrivateRoute from '../PrivateRoute'
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
-    const navigator = useRouter()
+    const navigator = useRouter();
+    const { user } = useAuth();
+    console.log(user);
     const handleLogout = () => {
         removeItem("user");
         navigator.push("/login")
@@ -26,10 +30,15 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <Link href="/dashboard/profile">
             <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Profile</li>
         </Link>
-        <Link href="/dashboard/events">
-            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Events</li>
+        <Link href="/dashboard/feedback">
+            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Feedback & Suggestions</li>
         </Link>
-        <li onClick={() => handleLogout()} className="btn btn-error btn-sm rounded">Logout</li>
+        {/* <Link href="/dashboard/events">
+            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Events</li>
+        </Link> */}
+        {
+            user && <li onClick={() => handleLogout()} className="btn btn-error btn-sm rounded">Logout</li>
+        }
 
     </>
     return (
@@ -43,10 +52,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </label>
                 </div>
+                <PrivateRoute>
 
-                <Suspense fallback={<Loading />}>
-                    {children}
-                </Suspense>
+                    <Suspense fallback={<Loading />}>
+
+                        {children}
+                    </Suspense>
+                </PrivateRoute>
+
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
