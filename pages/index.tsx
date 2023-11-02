@@ -3,9 +3,11 @@ import UserLayout from "../src/layout/UserLayout";
 import Image from "next/image";
 import ServiceCard from "@/src/components/ServiceCard";
 import { servicesData } from "./data.js"
+import Tip from "@/src/components/Tip";
+import SuccessStory from "@/src/components/SuccessStory";
 
 export default function Home() {
-  
+
 
   const upcomingServices = [
     {
@@ -83,10 +85,12 @@ export default function Home() {
   const adoptionStories = [
     {
       title: 'Luna Finds a Forever Home',
+      imageSrc: "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8xNV9waG90b19vZl9hX2RvZ19ydW5uaW5nX3dpdGhfb3duZXJfYXRfcGFya19lcF9mM2I3MDQyZC0zNWJlLTRlMTQtOGZhNy1kY2Q2OWQ1YzQzZjlfMi5qcGc.jpg",
       story: 'After months of waiting, sweet Luna found her perfect family. She now enjoys long walks and endless cuddles!',
     },
     {
       title: 'Maxs Journey to Happiness',
+      imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvZIDWC2pVoEzfi6YBDjohzbq1pjrtQ1vK_rwJ478&s",
       story: 'Max, the energetic pup, overcame his fears and found love with a compassionate family. Hes now thriving and spreading joy!',
     },
   ];
@@ -107,11 +111,11 @@ export default function Home() {
 
 
       <section className="p-8">
-        <div className="container mx-auto">
+        <div className="lg:max-w-[1280px] mx-auto">
           <h2 className="text-2xl font-semibold text-center my-10 ">Available Pet Services</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {servicesData.map((service, index) => (
-            <ServiceCard service={service} key={index} />
+              <ServiceCard service={service} key={index} />
             ))}
           </div>
           <Link href="/services">
@@ -119,9 +123,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-8 my-10 min-h-screen bg-gray-100">
-        <div className="container mx-auto">
-          <h2 className="text-2xl font-semibold text-center my-10 ">Upcoming Events</h2>
+      <section className="py-20 my-10 bg-gray-100">
+        <div className="lg:max-w-[1280px]  mx-auto">
+          <h2 className="text-2xl font-semibold text-center mb-10 ">Upcoming Events</h2>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
             {upcomingEvents.map((service, index) => (
               <div key={index} className="bg-white rounded-lg p-4 shadow-md">
@@ -130,13 +134,13 @@ export default function Home() {
                 <p className="text-gray-600">Location: {service.location}</p>
               </div>
             ))}
-            
+
           </div>
         </div>
       </section>
 
       <section className="py-8">
-        <div className="container lg:w-2/3  mx-auto text-center">
+        <div className="lg:max-w-[1280px]  mx-auto text-center">
           <h2 className="text-2xl font-semibold">About PetPal</h2>
           <p className="mt-4 text-gray-600">
             PetPal is dedicated to providing the best care and services for your beloved pets. We are passionate about ensuring the well-being of all animals and offer a wide range of pet-related services and events.
@@ -149,10 +153,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-8 my-10 bg-gray-100">
-        <div className="container mx-auto text-center">
-          <h2 className="text-2xl font-semibold my-5">Client Reviews</h2>
-          <div className="grid gap-6 md:grid-cols-2 mt-4 lg:grid-cols-3">
+      <section className="py-20 my-10 bg-gray-100">
+        <div className="lg:max-w-[1280px] mx-auto text-center">
+          <h2 className="text-2xl font-semibold mb-10">Client Reviews</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {clientReviews.map((review, index) => (
               <div key={index} className="bg-white rounded-lg p-5 shadow-md">
                 <Image height={50} width={50} src={review.image} className="mx-auto h-10 -top-2 w-10 rounded-full ring-1 right-1/2 ring-blue-400" alt="" />
@@ -168,9 +172,9 @@ export default function Home() {
 
 
       <section className="py-8 my-10">
-        <div className="container mx-auto">
-          <h2 className="text-2xl font-semibold text-center my-3 ">Latest News</h2>
-          <div className="grid gap-6">
+        <div className="lg:max-w-[1280px] mx-auto">
+          <h2 className="text-2xl font-semibold text-center">Latest News</h2>
+          <div className="grid gap-6 my-10 space-y-10">
             {latestNews.map((news, index) => (
               <div key={index} className="bg-white rounded-lg p-4 shadow-md">
                 <h3 className="text-lg font-semibold">{news.title}</h3>
@@ -184,34 +188,33 @@ export default function Home() {
 
 
 
-      <section className="py-8 bg-base-200">
-        <div className="container mx-auto text-center">
-          <h2 className="text-2xl font-semibold">Pet Health Tips</h2>
+      <section className="py-20 bg-base-200">
+        <div className="lg:max-w-[1280px] mx-auto">
+          <h2 className="text-2xl font-semibold text-center">Pet Health Tips</h2>
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             {healthTips.map((tip, index) => (
-              <div key={index} className="p-4 bg-white rounded-lg shadow-md">
-                <p className="text-gray-800">{tip}</p>
-              </div>
+              <Tip key={index} tip={tip} />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-8 bg-base-100">
-        <div className="container mx-auto text-center">
+      <section className="py-8 my-10 bg-base-100">
+        <div className="lg:max-w-[1280px] mx-auto text-center">
           <h2 className="text-2xl font-semibold">Pet Adoption Success Stories</h2>
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             {adoptionStories.map((story, index) => (
-              <div key={index} className="p-4 bg-white rounded-lg shadow-md">
-                <h3 className="text-lg font-semibold mb-2">{story.title}</h3>
-                <p className="text-gray-800">{story.story}</p>
-              </div>
+              // <div key={index} className="p-4 bg-white rounded-lg shadow-md">
+              //   <h3 className="text-lg font-semibold mb-2">{story.title}</h3>
+              //   <p className="text-gray-800">{story.story}</p>
+              // </div>
+              <SuccessStory imageSrc={story.imageSrc} text={story.story} name={story.title} />
             ))}
           </div>
         </div>
       </section>
-      <section className="lg:max-w-[1280px] mx-auto text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
+      <section className="mx-auto text-gray-600 bg-gray-100 body-font">
+        <div className="lg:max-w-[1280px] px-5 py-24 mx-auto flex flex-wrap items-center">
           <div className="lg:max-w-xl md:w-1/2 md:pr-16 lg:pr-0 pr-0">
             <h1 className="title-font font-medium text-4xl text-gray-900">
               Welcome to Pet Services Hub
