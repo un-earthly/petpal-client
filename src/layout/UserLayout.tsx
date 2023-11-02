@@ -2,11 +2,18 @@ import Link from 'next/link'
 import React, { ReactNode, Suspense, useState } from 'react'
 import Footer from '../components/Footer'
 import Loading from '@/pages/loading'
+import { useRouter } from 'next/router'
+import { getItem, removeItem } from '../utils/useLocalStorage'
 
 export default function UserLayout({ children }: { children: ReactNode }) {
-    const user = false
+    const user = getItem("user")
+    const navigator = useRouter()
     const [serchTerm, setSearchTerm] = useState("")
     const handleSearch = () => { }
+    const handleLogout = () => {
+        removeItem("user");
+        navigator.push("/login")
+    }
     const menuLinks = <div className='flex items-center justify-center'>
         <li>
             <Link href="/about">About</Link>
@@ -43,7 +50,7 @@ export default function UserLayout({ children }: { children: ReactNode }) {
                     </label>
                     <ul tabIndex={0} className="mt-3 z-[1] p-4 space-y-3 shadow menu menu-sm dropdown-content bg-base-100 rounded w-52">
                         <li><Link href="/dashboard">Dashboard</Link></li>
-                        <li><button className='btn btn-sm btn-error hover:text-error'>Logout</button></li>
+                        <li><button onClick={() => handleLogout()} className='btn btn-sm btn-error hover:text-error'>Logout</button></li>
                     </ul>
                 </div>
             </>

@@ -92,15 +92,15 @@ export default function Home() {
   ];
   return (
     <UserLayout>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content lg:w-8/12 mx-auto flex-col lg:flex-row-reverse">
-          <Image alt={"banner"} height={400} width={400} src="/banner-image.jpg" className="max-w-sm rounded-lg shadow-2xl" />
-          <div>
+      <div className="flex items-center justify-center min-h-screen bg-base-200">
+        <div className="flex flex-col lg:flex-row-reverse items-center justify-between lg:max-w-[1280px] p-4">
+          <Image alt={"banner"} height={500} width={500} src="/banner-image.jpg" className="rounded-lg shadow-2xl" />
+          <div className="lg:max-w-xl mr-20">
             <h1 className="text-5xl font-bold">Welcome to PetPal</h1>
             <p className="py-6">
               Your trusted source for all things pets. Whether you have a furry friend, a feathery companion, or a scaly buddy, were here to provide you with the best pet care information and services.
             </p>
-            <Link href="/services" className="btn btn-accent">Checkout Services</Link>
+            <Link href="/services" className="btn btn-accent">Explore Services</Link>
           </div>
         </div>
       </div>
@@ -108,20 +108,20 @@ export default function Home() {
 
       <section className="p-8">
         <div className="container mx-auto">
-          <h2 className="text-2xl font-semibold text-center my-3 ">Available Pet Services</h2>
+          <h2 className="text-2xl font-semibold text-center my-10 ">Available Pet Services</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {servicesData.map((service, index) => (
             <ServiceCard service={service} key={index} />
             ))}
           </div>
           <Link href="/services">
-            <button className="btn btn-wide hover:btn-outline block duration-200 mx-auto btn-accent my-4 rounded-full">I want something else</button></Link>
+            <button className="btn btn-wide hover:btn-outline block duration-200 mx-auto btn-accent my-10 rounded-full">I want something else</button></Link>
         </div>
       </section>
 
-      <section className="py-8 my-10 bg-gray-100">
+      <section className="py-8 my-10 min-h-screen bg-gray-100">
         <div className="container mx-auto">
-          <h2 className="text-2xl font-semibold text-center my-3 ">Upcoming Events</h2>
+          <h2 className="text-2xl font-semibold text-center my-10 ">Upcoming Events</h2>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
             {upcomingEvents.map((service, index) => (
               <div key={index} className="bg-white rounded-lg p-4 shadow-md">
@@ -130,6 +130,7 @@ export default function Home() {
                 <p className="text-gray-600">Location: {service.location}</p>
               </div>
             ))}
+            
           </div>
         </div>
       </section>
@@ -209,7 +210,47 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+      <section className="lg:max-w-[1280px] mx-auto text-gray-600 body-font">
+        <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
+          <div className="lg:max-w-xl md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+            <h1 className="title-font font-medium text-4xl text-gray-900">
+              Welcome to Pet Services Hub
+            </h1>
+            <p className="leading-relaxed mt-4">
+              Your one-stop destination for pet care, exciting pet events, and volunteer opportunities to make a difference in the lives of our furry friends.
+            </p>
+          </div>
+          <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+            <h2 className="text-gray-900 text-lg font-medium title-font mb-5">Join Our Community</h2>
+            <div className="relative mb-4">
+              <label htmlFor="full-name" className="leading-7 text-sm text-gray-600">
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="full-name"
+                name="full-name"
+                className="w-full bg-white rounded border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div className="relative mb-4">
+              <label htmlFor="email" className="leading-7 text-sm text-gray-600">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="w-full bg-white rounded border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <button className="btn btn-accent btn-md rounded">
+              Get Started
+            </button>
+            <p className="text-xs text-gray-500 mt-3">Join us in making a positive impact on pets in need!</p>
+          </div>
+        </div>
+      </section>
 
     </UserLayout>
   );

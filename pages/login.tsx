@@ -1,5 +1,5 @@
 import { loginApi } from '@/src/route';
-import { setToken } from '@/src/utils/useLocalStorage';
+import { setItem } from '@/src/utils/useLocalStorage';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -21,12 +21,15 @@ export default function Login() {
             password,
         })
             .then(res => {
-                setToken(res.data.data.token)
+                console.log([ ])
+                setItem("user", JSON.stringify({ user: [...res.data.data.user, res.data.data.token] }))
                 toast.success(res.data.data.message)
                 navigate.push("/dashboard")
             })
             .catch(err => {
-                setIsError(err.response.data.errorMessages);
+                // setIsError(err.response.data.errorMessages);
+                console.log(err)
+
             })
             .finally(() => setIsLoading(false))
     };

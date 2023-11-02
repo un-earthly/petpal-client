@@ -1,5 +1,5 @@
 import { registerApi } from '@/src/route';
-import { setToken } from '@/src/utils/useLocalStorage';
+import { setItem } from '@/src/utils/useLocalStorage';
 import axios from "axios";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -28,12 +28,13 @@ const Signup = () => {
             role: "USER"
         })
             .then(res => {
-                setToken(res.data.data.token)
+                setItem("user", JSON.stringify({ user: [...res.data.data.data, res.data.data.token] }))
                 toast.success(res.data.data.message)
                 navigate.push("/dashboard")
             })
             .catch(err => {
-                setIsError(err.response.data.errorMessages);
+                // setIsError(err.response.data.errorMessages);
+                console.log(err)
             })
             .finally(() => setIsLoading(false))
     }

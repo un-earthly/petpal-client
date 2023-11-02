@@ -1,9 +1,19 @@
 import Loading from '@/pages/loading'
 import Link from 'next/link'
 import React, { ReactNode, Suspense } from 'react'
+import { useRouter } from 'next/router'
+import { removeItem } from '../utils/useLocalStorage'
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
+    const navigator = useRouter()
+    const handleLogout = () => {
+        removeItem("user");
+        navigator.push("/login")
+    }
     const links = <>
+        <Link href="/">
+            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Home</li>
+        </Link>
         <Link href="/dashboard">
             <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Dashboard</li>
         </Link>
@@ -19,6 +29,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <Link href="/dashboard/events">
             <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Events</li>
         </Link>
+        <li onClick={() => handleLogout()} className="btn btn-error btn-sm rounded">Logout</li>
+
     </>
     return (
         <div className="drawer lg:drawer-open">
@@ -38,7 +50,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-72 min-h-full bg-base-200 text-base-content">
+                <ul className="menu p-4 w-72 min-h-full bg-base-200 space-y-4 text-base-content">
                     {links}
                 </ul>
 
