@@ -6,7 +6,7 @@ type SchedulingModalProps = {
     isOpen: boolean;
     onClose: () => void;
     service: any;
-    availableTimeSlots: { time: string; isAvailable: boolean }[]; // Array of time slots with availability status
+    availableTimeSlots: { time: string; isAvailable: boolean }[];
 };
 
 const SchedulingModal: React.FC<SchedulingModalProps> = ({ isOpen, onClose, service, availableTimeSlots }) => {
@@ -39,6 +39,7 @@ const SchedulingModal: React.FC<SchedulingModalProps> = ({ isOpen, onClose, serv
         }
 
         localStorage.setItem("service", JSON.stringify(serviceData))
+        
         router.push("/cart")
         onClose();
     };

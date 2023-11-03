@@ -1,35 +1,33 @@
 import DashboardLayout from '@/src/layout/DashboardLayout'
 import React from 'react'
-import { servicesData } from '../data';
-import ServiceCard from '@/src/components/ServiceCard';
 
 export default function dashboard() {
-    // const notifications = [
-    //     {
-    //         id: 1,
-    //         title: 'New Message',
-    //         content: 'You have a new message from your pet sitter.',
-    //         type: "error"
-    //     },
-    //     {
-    //         id: 2,
-    //         title: 'Booking Confirmation',
-    //         content: 'Your pet grooming appointment has been confirmed.',
-    //         type: "success"
-    //     },
-    //     {
-    //         id: 2,
-    //         title: 'Booking Confirmation',
-    //         content: 'Your pet grooming appointment has been confirmed.',
-    //         type: "info"
-    //     },
-    //     {
-    //         id: 2,
-    //         title: 'Booking Confirmation',
-    //         content: 'Your pet grooming appointment has been confirmed.',
-    //         type: "warning"
-    //     },
-    // ];
+    const notifications = [
+        {
+            id: 1,
+            title: 'New Message',
+            content: 'You have a new message from your pet sitter.',
+            type: "error"
+        },
+        {
+            id: 2,
+            title: 'Booking Confirmation',
+            content: 'Your pet grooming appointment has been confirmed.',
+            type: "success"
+        },
+        {
+            id: 2,
+            title: 'Booking Confirmation',
+            content: 'Your pet grooming appointment has been confirmed.',
+            type: "info"
+        },
+        {
+            id: 2,
+            title: 'Booking Confirmation',
+            content: 'Your pet grooming appointment has been confirmed.',
+            type: "warning"
+        },
+    ];
     const user = { name: "jane doe", gender: "female" }
 
     return (
@@ -58,28 +56,9 @@ export default function dashboard() {
                     </div>
                 </section>
 
-                <div className="p-card p-4 mb-4">
+                {/* <div className="p-card p-4 mb-4">
                     <h2 className="text-2xl font-bold text-center">Featured Services</h2>
-                    <div className="flex justify-center">
-                        <div className="my-5">
-                            <div className="join">
-                                <div>
-                                    <div>
-                                        <input className="input input-bordered join-item" placeholder="Search" />
-                                    </div>
-                                </div>
-                                <select className="select select-bordered join-item">
-                                    <option disabled selected>Filter</option>
-                                    <option>Sci-fi</option>
-                                    <option>Drama</option>
-                                    <option>Action</option>
-                                </select>
-                                <div className="indicator">
-                                    <button className="btn join-item">Search</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div>
                         <div className="grid grid-cols-3 gap-5">
                             {
@@ -88,9 +67,9 @@ export default function dashboard() {
                         </div>
                         <button className='btn btn-outline btn-accent btn-wide my-4 block mx-auto'>Browse Services</button>
                     </div>
-                </div>
+                </div> */}
 
-                {/* <div className="w-full bg-gray-100 p-4 mb-4">
+                <div className="w-full bg-gray-100 p-4 mb-4">
                     <h2 className="text-xl font-bold mb-4 text-center">Notifications</h2>
                     <div className="space-y-4 w-2/3 mx-auto">
                         {notifications.map((notification) => (
@@ -124,7 +103,7 @@ export default function dashboard() {
                             </div>
                         ))}
                     </div>
-                </div> */}
+                </div>
             </div>
 
         </DashboardLayout>

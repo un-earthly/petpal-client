@@ -1,3 +1,4 @@
+import CartSkeleton from '@/src/Skeleton/CartSkeleton';
 import IService from '@/src/interfaces/service.interface';
 import UserLayout from '@/src/layout/UserLayout';
 import { setItem } from '@/src/utils/useLocalStorage';
@@ -21,10 +22,9 @@ export default function cart() {
         setServiceData([]);
         setItem("service", serviceData)
     };
-    const removeOneFromCart = (id:Number) => {
-        // setServiceData([]);
-        const removedItem = serviceData?.filter((s: IService) => s.id === id); 
-        setServiceData(removedItem?removedItem:[])
+    const removeOneFromCart = (id: Number) => {
+        const removedItem = serviceData?.filter((s: IService) => s.id !== id);
+        setServiceData(removedItem ? removedItem : [])
         setItem("service", JSON.stringify(removedItem))
     };
     return (
@@ -38,9 +38,10 @@ export default function cart() {
                         </svg>
                     </div>
                 </div>
-                <ul className="flex flex-col divide-y divide-gray-700">
+                <ul className="flex flex-col divide-y space-y-4 divide-gray-700">
                     {loading ? (
-                        <span className="loading loading-infinity loading-lg"></span>
+                        [1, 2, 3, 4].map(e => <CartSkeleton key={e} />
+                        )
                     ) : serviceData && serviceData.length > 0 ? (
                         serviceData.map((service: IService, index) => (
                             <li className="flex flex-col py-6 sm:flex-row sm:justify-between">
@@ -56,8 +57,8 @@ export default function cart() {
                                                 <p className="text-lg font-semibold">{service.pricing}$</p>
                                             </div>
                                         </div>
-                                        <div className="flex text-sm divide-x">
-                                            <button onClick={()=>removeOneFromCart(service.id)} type="button" className="flex items-center px-2 py-1 pl-0 space-x-1">
+                                        <div className="flex text-sm divide-gray-700 divide-x">
+                                            <button onClick={() => removeOneFromCart(service.id)} type="button" className="flex items-center px-2 py-1 pl-0 space-x-1">
 
                                                 <span>Remove</span>
                                             </button>
@@ -72,25 +73,24 @@ export default function cart() {
                                 </div>
                             </li>
                         ))) : <div>
-                        <h1 className="text-xl text-red-500 ">Please add some services</h1>
+
+                        <h1 className="text-xl text-center my-5 text-red-500 ">Please add some services</h1>
                         <Link href="/services" className='btn btn-accent mt-4'>Add Some</Link>
                     </div>}
-
-
                 </ul>
                 <div className="space-y-1 text-right">
                     <p>Total amount:
                         <span className="font-semibold">{totalAmount} $</span>
                     </p>
                 </div>
-                <div className="flex justify-end space-x-4">
+                {serviceData && serviceData.length > 0 && <div className="flex justify-end space-x-4">
                     <Link href="/services" className="px-6 py-2 border rounded-md duration-200">Back {" "}
                         <span className="sr-only sm:not-sr-only">to shop</span>
                     </Link>
                     <Link href="/checkout" className="px-6 py-2 border rounded-md hover:bg-accent border-accent duration-200">
                         <span className="sr-only sm:not-sr-only">Continue to {" "}</span>Checkout
                     </Link>
-                </div>
+                </div>}
             </div>
         </UserLayout>
 

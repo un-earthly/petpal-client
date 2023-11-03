@@ -10,17 +10,22 @@ import { servicesData } from '../data';
 
 export default function ServiceDetails() {
     const [loading, setLoading] = useState(true);
-    const { id } = useParams()
-    const [service, setServiceDetails] = useState<Partial<IService>>(servicesData[Number(id)])
-    const getServiceDetails = () => axios.get(getServiceDetailsApi(Number(id)))
-        .then(res =>    {
-        console.log(res);
-            setServiceDetails(res.data.data.service);
-            setLoading(false)
-    })
+    const param = useParams();
+    const [service, setServiceDetails] = useState<Partial<IService> | null>(null);
     useEffect(() => {
-        getServiceDetails()
-    })
+        if (param) {
+            setServiceDetails(servicesData[Number(param.id)])
+            axios.get(getServiceDetailsApi(Number(param.id)))
+                .then(res => {
+                    console.log(res);
+                    setServiceDetails(res.data.data.service);
+                })
+                .catch(err => console.log(err))
+                .finally(() => setLoading(false))
+        }
+
+
+    }, [param])
     const reviews = [
         {
             id: 1,
@@ -55,6 +60,38 @@ export default function ServiceDetails() {
     };
 
 
+    if (loading) {
+        return <div className='lg:p-24'>
+            <div className="lg:max-w-[1280px] px-5 mx-auto flex flex-col">
+                <div className="w-full mx-auto">
+                    <div className="rounded-lg h-[400px] bg-gray-300">
+                    </div>
+                    <div className="flex flex-col sm:flex-row mt-10">
+                        <div className="sm:w-1/3 sm:pr-8 sm:py-8">
+                            <div className="flex flex-col items-center bg-gray-400 p-10 text-center justify-center">
+                                <p className="bg-gray-100 h-9 animate-pulse mb-3 w-2/3"></p>
+                                <div className="w-12 h-1 bg-gray-100 rounded mt-2 mb-4"></div>
+                                <p className="bg-gray-100 h-7 animate-pulse w-1/3"></p>
+                            </div>
+                        </div>
+                        <div className="sm:w-2/3 sm:p-8 sm:py-8 sm:border-l bg-gray-400 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0">
+                            <div className="bg-gray-100 h-4 animate-pulse mb-4"></div>
+                            <div className="bg-gray-100 animate-pulse h-14 w-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="mt-20 lg:max-w-[1280px] mx-auto">
+                <h2 className="bg-gray-300 rounded h-10 w-1/3 mx-auto animate-pulse"></h2>
+                <div className="flex items-center justify-between gap-5 p-4 px-9 animate-pulse rounded -m-4 bg-gray-300 h-96 mt-5">
+                    <div className="bg-gray-100 h-80 w-3/4 rounded animate-pulse"></div>
+                    <div className="bg-gray-100 h-80 w-3/4 rounded animate-pulse"></div>
+                </div>
+            </div>
+
+        </div>
+    }
+
 
     return (
         <UserLayout>
@@ -65,29 +102,29 @@ export default function ServiceDetails() {
                             <img
                                 alt="content"
                                 className="object-cover object-center h-full w-full"
-                                src={service.image}
+                                src={service?.image}
                             />
                         </div>
                         <div className="flex flex-col sm:flex-row mt-10">
                             <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
                                 <div className="flex flex-col items-center text-center justify-center">
                                     <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">
-                                        {service.title}
+                                        {service?.title}
                                     </h2>
                                     <div className="w-12 h-1 bg-cyan-500 rounded mt-2 mb-4"></div>
-                                    <p className="text-base">${service.pricing}</p>
+                                    <p className="text-base">${service?.pricing}</p>
                                 </div>
                             </div>
                             <div className="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-                                <p className="leading-relaxed text-lg mb-4">{service.description}</p>
-                                <a onClick={openModal} className="text-cyan-500 inline-flex items-center">
+                                <p className="leading-relaxed text-lg mb-4">{service?.description}</p>
+                                <a onClick={openModal} className="text-cyan-500 cursor-pointer inline-flex items-center">
                                     Book Now
                                     <svg
                                         fill="none"
                                         stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
                                         className="w-4 h-4 ml-2"
                                         viewBox="0 0 24 24"
                                     >
