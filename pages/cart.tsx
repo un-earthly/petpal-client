@@ -1,5 +1,6 @@
 import IService from '@/src/interfaces/service.interface';
 import UserLayout from '@/src/layout/UserLayout';
+import { setItem } from '@/src/utils/useLocalStorage';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
@@ -16,10 +17,27 @@ export default function cart() {
     const totalAmount = serviceData
         ? serviceData.reduce((total, service) => total + parseFloat(service.pricing), 0)
         : 0;
+    const removeAllFromCart = () => {
+        setServiceData([]);
+        setItem("service", serviceData)
+    };
+    const removeOneFromCart = (id:Number) => {
+        // setServiceData([]);
+        const removedItem = serviceData?.filter((s: IService) => s.id === id); 
+        setServiceData(removedItem?removedItem:[])
+        setItem("service", JSON.stringify(removedItem))
+    };
     return (
         <UserLayout>
             <div className="flex flex-col p-6 space-y-4 sm:p-10">
-                <h2 className="text-xl font-semibold">Your cart</h2>
+                <div className="flex item-center justify-between">
+                    <h2 className="text-xl font-semibold">Your cart</h2>
+                    <div onClick={removeAllFromCart} className="btn btn-error btn-sm rounded-full h-10 w-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="currentColor" className="bi bi-archive" viewBox="0 0 16 16">
+                            <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+                    </div>
+                </div>
                 <ul className="flex flex-col divide-y divide-gray-700">
                     {loading ? (
                         <span className="loading loading-infinity loading-lg"></span>
@@ -39,7 +57,7 @@ export default function cart() {
                                             </div>
                                         </div>
                                         <div className="flex text-sm divide-x">
-                                            <button type="button" className="flex items-center px-2 py-1 pl-0 space-x-1">
+                                            <button onClick={()=>removeOneFromCart(service.id)} type="button" className="flex items-center px-2 py-1 pl-0 space-x-1">
 
                                                 <span>Remove</span>
                                             </button>

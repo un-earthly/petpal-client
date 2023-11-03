@@ -1,27 +1,12 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import SchedulingModal from './SchedulingModal';
+import { useRouter } from 'next/router';
 
 export default function ServiceCard({ service }: { service: any }) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const sampleAvailableTimeSlots = [
-        { time: '08:00 AM', isAvailable: true },
-        { time: '09:00 AM', isAvailable: true },
-        { time: '10:00 AM', isAvailable: false },
-        { time: '11:00 AM', isAvailable: true },
-        { time: '01:00 PM', isAvailable: true },
-        { time: '02:00 PM', isAvailable: true },
-        // Add more time slots as needed
-    ];
+    
 
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
+    const navigate = useRouter().push;
 
     return (
         <div className="card h-96 overflow-hidden group bg-base-100 shadow-xl image-full">
@@ -36,14 +21,13 @@ export default function ServiceCard({ service }: { service: any }) {
                 </div>
                 <div className="card-actions justify-end">
                     <button
-                        onClick={openModal}
+                        onClick={() => navigate(`/services/${service.id}`)}
                         className="btn btn-accent font-bold duration-200 btn-outline rounded-full"
                     >
                         Book Now
                     </button>
                 </div>
             </div>
-            <SchedulingModal availableTimeSlots={sampleAvailableTimeSlots} isOpen={isModalOpen} onClose={closeModal} service={service} />
 
         </div>
     );
