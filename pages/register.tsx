@@ -28,7 +28,8 @@ const Signup = () => {
             role: "USER"
         })
             .then(res => {
-                setItem("user", JSON.stringify({ user: [res.data.data.user, res.data.data.token] }))
+                setItem("user", JSON.stringify(res.data.data))
+                console.log(res.data.data.token)
                 login(res.data.data.user);
                 toast.success(res.data.data.message)
                 navigate.push("/dashboard")

@@ -1,6 +1,6 @@
 import Loading from '@/pages/loading'
 import Link from 'next/link'
-import React, { ReactNode, Suspense } from 'react'
+import React, { ReactNode, Suspense, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { removeItem } from '../utils/useLocalStorage'
 import { useAuth } from '../context/authContext'
@@ -8,34 +8,75 @@ import PrivateRoute from '../PrivateRoute'
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
     const navigator = useRouter();
-    const { user } = useAuth();
-    console.log(user);
+    const [userRole, setUserRole] = useState("");
+    const { user, isLoading } = useAuth();
     const handleLogout = () => {
         removeItem("user");
+
         navigator.push("/login")
+
+    }
+    useEffect(() => {
+        console.log(user && user.role)
+
+        if (user && user.role === "ADMIN") {
+            setUserRole("ADMIN")
+        }
+        if (user && user.role === "SUPER_ADMIN") {
+            setUserRole("SUPER_ADMIN")
+        }
+        if (user && user.role === "USER") {
+            setUserRole("USER")
+        }
+    }, [user])
+
+    if (isLoading) {
+        return <p>loading...</p>
     }
     const links = <>
         <Link href="/">
             <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Home</li>
         </Link>
-        <Link href="/dashboard">
-            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Dashboard</li>
-        </Link>
-        <Link href="/dashboard/bookings">
-            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Bookings</li>
-        </Link>
-        <Link href="/dashboard/pets">
-            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Pets</li>
-        </Link>
+        {userRole === "USER" && <>
+            <Link href="/dashboard">
+                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Dashboard</li>
+            </Link>
+            <Link href="/dashboard/bookings">
+                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Bookings</li>
+            </Link>
+            <Link href="/dashboard/pets">
+                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Pets</li>
+            </Link>
+        </>
+        }
         <Link href="/dashboard/profile">
             <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Profile</li>
         </Link>
-        <Link href="/dashboard/feedback">
-            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Feedback & Suggestions</li>
+        {
+            userRole === "USER" && <Link href="/dashboard/feedback">
+                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Feedback & Suggestions</li>
+            </Link>
+        }
+        {userRole === "ADMIN" && <>
+            <Link href="/dashboard/manage/user">
+                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Users</li>
+            </Link>
+            <Link href="/dashboard/manage/services">
+                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Services</li>
+            </Link>
+            <Link href="/dashboard/manage/bookings">
+                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Bookings</li>
+            </Link>
+            <Link href="/dashboard/manage/contents">
+                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Contents</li>
+            </Link>
+        </>
+        }
+
+        {userRole === "SUPER_ADMIN" && <Link href="/dashboard/manage/admin">
+            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Admins</li>
         </Link>
-        {/* <Link href="/dashboard/events">
-            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Events</li>
-        </Link> */}
+        }
         {
             user && <li onClick={() => handleLogout()} className="btn btn-error btn-sm rounded">Logout</li>
         }
@@ -53,9 +94,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     </label>
                 </div>
                 <PrivateRoute>
-
                     <Suspense fallback={<Loading />}>
-
                         {children}
                     </Suspense>
                 </PrivateRoute>

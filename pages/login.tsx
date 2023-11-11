@@ -20,9 +20,9 @@ export default function Login() {
             password,
         })
             .then(res => {
-                setItem("user", JSON.stringify({ user: [res.data.data.user, res.data.data.token] }))
-                toast.success(res.data.data.message)
-                login(res.data.data.user);
+                setItem("user", JSON.stringify(res.data.data))
+                toast.success(res.data.data.message);
+                login(res.data.data);
                 navigate.push("/dashboard")
             })
             .catch(err => {

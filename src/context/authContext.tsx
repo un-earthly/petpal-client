@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
-import React, { createContext, ReactNode, useContext,useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { getItem } from '../utils/useLocalStorage';
+import IUser from '../interfaces/user.interface';
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 

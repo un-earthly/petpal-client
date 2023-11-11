@@ -4,7 +4,7 @@ import SchedulingModal from './SchedulingModal';
 import { useRouter } from 'next/router';
 
 export default function ServiceCard({ service }: { service: any }) {
-    
+
 
     const navigate = useRouter().push;
 
@@ -24,7 +24,7 @@ export default function ServiceCard({ service }: { service: any }) {
                         onClick={() => navigate(`/services/${service.id}`)}
                         className="btn btn-accent font-bold duration-200 btn-outline rounded-full"
                     >
-                        Book Now
+                        Details
                     </button>
                 </div>
             </div>
