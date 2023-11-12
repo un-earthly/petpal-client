@@ -1,34 +1,27 @@
-import IService, { ITimeSlot } from "./service.interface"
-import IUser from "./user.interface"
+import { IPayment } from "./payment.interface";
+import { IService } from "./service.interface";
+import { ITimeSlot } from "./timeslot.interface";
+import { IUser } from "./user.interface";
 
-export enum IPaymentEnum {
-    UNPAID = 'UNPAID',
-    PAID = 'PAID',
-    REFUNDED = 'REFUNDED',
-}
-export enum IBookingStatusEnum {
+export enum BookingStatus {
     PENDING = 'PENDING',
     CONFIRMED = 'CONFIRMED',
     COMPLETED = 'COMPLETED',
     CANCELED = 'CANCELED',
 }
-export default interface IBooking {
-    // id: number;
-    // bookingDate: Date;
-    // serviceTime: string;
-    // status: IBookingStatusEnum;
-    // paymentAmount: number;
-    // paymentStatus: IPaymentEnum;
-    // paymentDate: Date;
-    // userId: number;
-    // serviceId: number;
-    // petId: number;
-    id: number
-    timeSlotId: number
-    timeSlot: ITimeSlot
-    status: IBookingStatusEnum
-    userId: number
-    user?: IUser
-    serviceId: number
-    service?: IService
+
+
+export interface IBooking {
+    id: number;
+    timeSlotId: number;
+    timeSlot: ITimeSlot;
+    paymentId?: number | null;
+    payment?: IPayment | null;
+    status: BookingStatus;
+    userId: number;
+    user: IUser;
+    serviceId: number;
+    service: IService;
+    createdAt: Date;
+    updatedAt: Date;
 }

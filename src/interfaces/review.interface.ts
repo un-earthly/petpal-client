@@ -1,12 +1,15 @@
-import IUser from "./user.interface";
+import { IService } from "./service.interface";
+import { IUser } from "./user.interface";
 
-interface IReview {
+
+export interface IReview {
     id: number;
     rating: number;
     comments: string;
-    userID: number;
-    user: Partial<IUser>;
-    serviceId?: number;
-    petId?: number;
+    userId: number;
+    user: IUser;
+    serviceId: number;
+    service: IService;
+    createdAt: Date;
+    updatedAt: Date;
 }
-export default IReview

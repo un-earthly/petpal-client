@@ -1,9 +1,12 @@
+import { IUser } from "./user.interface";
 
-interface IArticle {
+export interface IArticle {
     id: number;
     title: string;
     content: string;
     authorId: number;
+    author: IUser;
+    createdAt: Date;
+    updatedAt: Date;
+    userId?: number | null;
 }
-
-export default IArticle;
