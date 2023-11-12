@@ -1,4 +1,5 @@
 import DashboardLayout from '@/src/layout/DashboardLayout'
+import Head from 'next/head';
 import React from 'react'
 
 export default function dashboard() {
@@ -32,7 +33,9 @@ export default function dashboard() {
 
     return (
         <DashboardLayout>
-            
+            <Head>
+                <title>Dashboard - PetPal</title>
+            </Head>
             <div className='bg-gray-50'>
 
                 <section className="text-gray-600 body-font pt-10">

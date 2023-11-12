@@ -1,4 +1,5 @@
 import UserLayout from '@/src/layout/UserLayout'
+import Head from 'next/head'
 import React, { useState } from 'react'
 
 const CheckoutForm: React.FC = () => {
@@ -21,7 +22,9 @@ const CheckoutForm: React.FC = () => {
 
     return (
         <UserLayout>
-
+            <Head>
+                <title>Checkout - PetPal</title>
+            </Head>
             <main className="p-6 h-full flex items-center  bg-gray-100 justify-center ">
                 <form onSubmit={handleSubmit} className="max-w-md rounded-lg shadow-md bg-white p-4 space-y-4">
                     <h1 className="text-2xl font-bold mb-4 text-center">Checkout</h1>

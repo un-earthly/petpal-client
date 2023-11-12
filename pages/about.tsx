@@ -20,7 +20,7 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="container mx-auto p-6">
+                <div className="max-w-[1280px] mx-auto p-6">
                     <section className="mb-8 max-w-3xl mx-auto text-center">
                         <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
                         <p className="text-gray-700">

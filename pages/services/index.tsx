@@ -3,6 +3,7 @@ import UserLayout from '@/src/layout/UserLayout';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { getservicesApi } from '@/src/route';
+import Head from 'next/head';
 export default function services() {
     const [services, setServices] = useState([])
     const [loading, setLoading] = useState(true);
@@ -10,14 +11,17 @@ export default function services() {
     useEffect(() => {
         axios.get(getservicesApi)
             .then(res => {
-            console.log(res);
-            setServices(res.data.data.services)
-        }
-        ).catch(err => console.log(err))
+                console.log(res);
+                setServices(res.data.data.services)
+            }
+            ).catch(err => console.log(err))
             .finally(() => setLoading(false))
     }, [])
     return (
         <UserLayout>
+            <Head>
+                <title>Our Services - PetPal</title>
+            </Head>
 
             <div className="hero min-h-screen" style={{ backgroundImage: 'url(/cat-banner.jpg)' }}>
                 <div className="hero-overlay bg-opacity-60"></div>
@@ -45,7 +49,7 @@ export default function services() {
                                         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-cyan-500"></div>
                                     </div>
                                 ) : (
-                                    services&&services.length > 0 ? services.map((service, index) => (
+                                    services && services.length > 0 ? services.map((service, index) => (
                                         <ServiceCard service={service} key={index} />
                                     )) : <p className='col-span-3 text-center text-error'>No Services Available Right Now</p>
                                 )}

@@ -2,6 +2,7 @@ import { useAuth } from '@/src/context/authContext';
 import { loginApi } from '@/src/route';
 import { setItem } from '@/src/utils/useLocalStorage';
 import axios from 'axios';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { FormEvent, useState } from 'react';
@@ -35,6 +36,9 @@ export default function Login() {
 
     return (
         <div className="flex min-h-screen items-center bg-gray-100 flex-col justify-center px-6 py-12 lg:px-8">
+            <Head>
+                <title>Login - PetPal</title>
+            </Head>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <h1 className="text-xl font-extrabold text-center">
                     PETPAL

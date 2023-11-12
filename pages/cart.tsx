@@ -2,6 +2,7 @@ import CartSkeleton from '@/src/Skeleton/CartSkeleton';
 import IService from '@/src/interfaces/service.interface';
 import UserLayout from '@/src/layout/UserLayout';
 import { removeItem, setItem } from '@/src/utils/useLocalStorage';
+import Head from 'next/head';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
@@ -29,6 +30,9 @@ export default function cart() {
     };
     return (
         <UserLayout>
+            <Head>
+                <title>Cart - PetPal</title>
+            </Head>
             <div className="flex flex-col p-6 space-y-4 sm:p-10">
                 <div className="flex item-center justify-between">
                     <h2 className="text-xl font-semibold">Your cart</h2>

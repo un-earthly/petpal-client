@@ -1,3 +1,6 @@
+import IService, { ITimeSlot } from "./service.interface"
+import IUser from "./user.interface"
+
 export enum IPaymentEnum {
     UNPAID = 'UNPAID',
     PAID = 'PAID',
@@ -10,14 +13,22 @@ export enum IBookingStatusEnum {
     CANCELED = 'CANCELED',
 }
 export default interface IBooking {
-    id: number;
-    bookingDate: Date;
-    serviceTime: string;
-    status: IBookingStatusEnum;
-    paymentAmount: number;
-    paymentStatus: IPaymentEnum;
-    paymentDate: Date;
-    userId: number;
-    serviceId: number;
-    petId: number;
+    // id: number;
+    // bookingDate: Date;
+    // serviceTime: string;
+    // status: IBookingStatusEnum;
+    // paymentAmount: number;
+    // paymentStatus: IPaymentEnum;
+    // paymentDate: Date;
+    // userId: number;
+    // serviceId: number;
+    // petId: number;
+    id: number
+    timeSlotId: number
+    timeSlot: ITimeSlot
+    status: IBookingStatusEnum
+    userId: number
+    user?: IUser
+    serviceId: number
+    service?: IService
 }

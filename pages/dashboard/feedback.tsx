@@ -1,4 +1,5 @@
 import DashboardLayout from '@/src/layout/DashboardLayout'
+import Head from 'next/head';
 import React, { useState } from 'react'
 
 export default function feedback() {
@@ -17,6 +18,9 @@ export default function feedback() {
     };
     return (
         <DashboardLayout>
+            <Head>
+                <title>Feedback - PetPal</title>
+            </Head>
             <section className="text-gray-600 body-font relative">
                 <div className="container px-5 py-24 mx-auto">
                     <div className="flex flex-col text-center w-full mb-12">

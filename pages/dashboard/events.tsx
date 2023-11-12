@@ -3,10 +3,14 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import "swiper/swiper-bundle.css";
 import { Pagination } from 'swiper/modules';
+import Head from 'next/head';
 export default function events() {
 
     return (
         <DashboardLayout>
+            <Head>
+                <title>Events - PetPal</title>
+            </Head>
             <div className='overflow-hidden'>
 
                 <div className="flex h-screen relative overflow-y-scroll">

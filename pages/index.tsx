@@ -6,6 +6,7 @@ import { servicesData } from "./data.js"
 import Tip from "@/src/components/Tip";
 import SuccessStory from "@/src/components/SuccessStory";
 import { useState } from "react"
+import Head from "next/head";
 interface FaqItem {
   question: string;
   answer: string;
@@ -124,6 +125,11 @@ export default function Home() {
   };
   return (
     <UserLayout>
+      
+      <Head>
+        <title>Home - PetPal</title>
+      </Head>
+
       <div className="flex items-center justify-center min-h-screen bg-base-200">
         <div className="flex flex-col lg:flex-row-reverse items-center justify-between lg:max-w-[1280px] p-4">
           <Image alt={"banner"} height={500} width={500} src="/banner-image.jpg" className="rounded-lg shadow-2xl" />

@@ -3,6 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import DashboardLayout from '@/src/layout/DashboardLayout';
 import UploadWidget from '@/src/components/UploadWidgets';
+import Head from 'next/head';
 
 const ProfileForm = () => {
   const initialValues = {
@@ -43,6 +44,9 @@ const ProfileForm = () => {
 
   return (
     <DashboardLayout>
+      <Head>
+        <title>Edit Profile - PetPal</title>
+      </Head>
       <div className="p-4">
         <h1 className="text-3xl font-bold mb-4">Edit Profile</h1>
         <Formik
