@@ -6,7 +6,8 @@ import { getservicesApi } from '@/src/route';
 import { servicesData } from '../data';
 export default function services() {
     const [services, setServices] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+    const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false)
     useEffect(() => {
         axios.get(getservicesApi).then(res => {
             console.log(res);
@@ -33,6 +34,9 @@ export default function services() {
                 <div className="lg:max-w-[1280px] my-10 mx-auto">
                     <h1 className="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
                         Available Pet Services</h1>
+                    <div onClick={() => setIsFilterMenuOpen(!isFilterMenuOpen)}>
+                        Filters
+                    </div>
                     <div className="grid md:grid-cols-9 gap-4 my-10 min-h-screen">
                         <div className="col-span-6">
                             <div className="grid gap-4 md:grid-cols-2">
@@ -47,7 +51,8 @@ export default function services() {
                                 )}
                             </div>
                         </div>
-                        <div className="col-span-3">
+                        <div className={`lg:col-span-3 duration-300 lg:static fixed top-0 ${isFilterMenuOpen?"left-0":"-left-full"} z-50 bg:black/70`}>
+                            <div onClick={() => setIsFilterMenuOpen(!isFilterMenuOpen)} className="lg:hidden absolute top-6 -right-3 text-white bg-black rounded-full h-7 w-7 flex items-center justify-center">X</div>
                             <div className="bg-gray-200 p-10 rounded-lg">
                                 <div className="mb-4">
                                     <h3 className="text-gray-950 font-semibold ">Price Range</h3>

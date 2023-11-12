@@ -19,7 +19,7 @@ export default function ServiceCard({ service }: { service: any }) {
                     <p>{service.description}</p>
                     <p>${service.pricing} / Per hour</p>
                 </div>
-                <div className="card-actions justify-end">
+                <div className="card-actions justify-start">
                     <button
                         onClick={() => navigate(`/services/${service.id}`)}
                         className="btn btn-accent font-bold duration-200 btn-outline rounded-full"

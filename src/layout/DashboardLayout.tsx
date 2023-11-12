@@ -12,9 +12,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     const { user, isLoading } = useAuth();
     const handleLogout = () => {
         removeItem("user");
-
         navigator.push("/login")
-
     }
     useEffect(() => {
         console.log(user && user.role)
@@ -37,7 +35,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <Link href="/">
             <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Home</li>
         </Link>
-        {userRole === "USER" && <>
+        {
+            userRole === "USER" && <>
             <Link href="/dashboard">
                 <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Dashboard</li>
             </Link>
@@ -57,25 +56,27 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">My Feedback & Suggestions</li>
             </Link>
         }
-        {userRole === "ADMIN" && <>
-            <Link href="/dashboard/manage/user">
-                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Users</li>
-            </Link>
-            <Link href="/dashboard/manage/services">
-                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Services</li>
-            </Link>
-            <Link href="/dashboard/manage/bookings">
-                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Bookings</li>
-            </Link>
-            <Link href="/dashboard/manage/contents">
-                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Contents</li>
-            </Link>
-        </>
+        {
+            userRole === "ADMIN" && <>
+                <Link href="/dashboard/manage/user">
+                    <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Users</li>
+                </Link>
+                <Link href="/dashboard/manage/services">
+                    <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Services</li>
+                </Link>
+                <Link href="/dashboard/manage/bookings">
+                    <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Bookings</li>
+                </Link>
+                <Link href="/dashboard/manage/contents">
+                    <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Contents</li>
+                </Link>
+            </>
         }
 
-        {userRole === "SUPER_ADMIN" && <Link href="/dashboard/manage/admin">
-            <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Admins</li>
-        </Link>
+        {
+            userRole === "SUPER_ADMIN" && <Link href="/dashboard/manage/admin">
+                <li className="hover:bg-gray-200 duration-200 cursor-pointer p-2 rounded">Manage Admins</li>
+            </Link>
         }
         {
             user && <li onClick={() => handleLogout()} className="btn btn-error btn-sm rounded">Logout</li>
@@ -93,11 +94,13 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </label>
                 </div>
-                <PrivateRoute>
-                    <Suspense fallback={<Loading />}>
-                        {children}
-                    </Suspense>
-                </PrivateRoute>
+                <div className="w-10/12 mx-auto py-10">
+                    <PrivateRoute>
+                        <Suspense fallback={<Loading />}>
+                            {children}
+                        </Suspense>
+                    </PrivateRoute>
+                </div>
 
             </div>
             <div className="drawer-side">
