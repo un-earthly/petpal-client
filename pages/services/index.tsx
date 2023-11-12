@@ -3,15 +3,15 @@ import UserLayout from '@/src/layout/UserLayout';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { getservicesApi } from '@/src/route';
-import { servicesData } from '../data';
 export default function services() {
     const [services, setServices] = useState([])
     const [loading, setLoading] = useState(true);
     const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false)
     useEffect(() => {
-        axios.get(getservicesApi).then(res => {
+        axios.get(getservicesApi)
+            .then(res => {
             console.log(res);
-            setServices(res.data.data.services || servicesData)
+            setServices(res.data.data.services)
         }
         ).catch(err => console.log(err))
             .finally(() => setLoading(false))
@@ -19,7 +19,7 @@ export default function services() {
     return (
         <UserLayout>
 
-            <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg)' }}>
+            <div className="hero min-h-screen" style={{ backgroundImage: 'url(/cat-banner.jpg)' }}>
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="">
@@ -45,13 +45,13 @@ export default function services() {
                                         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-cyan-500"></div>
                                     </div>
                                 ) : (
-                                    services.length > 0 ? services.map((service, index) => (
+                                    services&&services.length > 0 ? services.map((service, index) => (
                                         <ServiceCard service={service} key={index} />
                                     )) : <p className='col-span-3 text-center text-error'>No Services Available Right Now</p>
                                 )}
                             </div>
                         </div>
-                        <div className={`lg:col-span-3 duration-300 lg:static fixed top-0 ${isFilterMenuOpen?"left-0":"-left-full"} z-50 bg:black/70`}>
+                        <div className={`lg:col-span-3 duration-300 lg:static fixed top-0 ${isFilterMenuOpen ? "left-0" : "-left-full"} z-50 bg:black/70`}>
                             <div onClick={() => setIsFilterMenuOpen(!isFilterMenuOpen)} className="lg:hidden absolute top-6 -right-3 text-white bg-black rounded-full h-7 w-7 flex items-center justify-center">X</div>
                             <div className="bg-gray-200 p-10 rounded-lg">
                                 <div className="mb-4">
@@ -114,22 +114,6 @@ export default function services() {
                                         <option value="1">1 Star & Up</option>
                                     </select>
                                 </div>
-
-                                {/* Filter by Special Features */}
-                                <div className="mb-4">
-                                    <h3 className="text-gray-950 font-semibold ">Special Features</h3>
-                                    <label className="flex items-center space-x-2 mt-2">
-                                        <input type="checkbox" className="" />
-                                        <span className="text-gray-950">Webcam Access</span>
-                                    </label>
-                                    <label className="flex items-center space-x-2 mt-2">
-                                        <input type="checkbox" className="text-cyan-500" />
-                                        <span className="text-gray-950">Spa Treatments</span>
-                                    </label>
-                                    {/* Add more special features as needed */}
-                                </div>
-
-                                {/* Apply Filter Button */}
                                 <button className="btn btn-accent rounded-md w-full">
                                     Apply Filters
                                 </button>

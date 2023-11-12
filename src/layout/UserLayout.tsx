@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { ReactNode, Suspense,useMemo, useState } from 'react'
+import React, { ReactNode, Suspense, useCallback, useState } from 'react'
 import Footer from '../components/Footer'
 import Loading from '@/pages/loading'
 import { useRouter } from 'next/router'
@@ -8,15 +8,18 @@ import { useAuth } from '../context/authContext'
 import IService from '../interfaces/service.interface'
 
 export default function UserLayout({ children }: { children: ReactNode }) {
-    const { user } = useAuth(); 
+    const { user } = useAuth();
     const navigator = useRouter()
     const [serchTerm, setSearchTerm] = useState("")
-    const cartItems = useMemo(() => {
+    const getCartItems = useCallback(() => {
         const cartData = getItem('service');
-        return cartData ? JSON.parse(cartData) : [];
+        return cartData && cartData.length > 0 ? JSON.parse(cartData) : [];
     }, []);
+
+    const cartItems = getCartItems();
+
     const totalAmount = cartItems
-        ? cartItems.reduce((total:number, service:IService) => total + parseFloat(service.pricing), 0)
+        ? cartItems.reduce((total: number, service: IService) => total + parseFloat(service.pricing), 0)
         : 0;
     const handleSearch = () => { }
     const handleLogout = () => {

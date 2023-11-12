@@ -142,9 +142,9 @@ export default function Home() {
         <div className="lg:max-w-[1280px] mx-auto">
           <h2 className="text-2xl font-semibold text-center my-10 ">Available Pet Services</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {servicesData.map((service, index) => (
+            {servicesData ? servicesData.map((service, index) => (
               <ServiceCard service={service} key={index} />
-            ))}
+            )) : "Service Record Not Found"}
           </div>
           <Link href="/services">
             <button className="btn btn-wide hover:btn-outline block duration-200 mx-auto btn-accent my-10 rounded-full">I want something else</button></Link>

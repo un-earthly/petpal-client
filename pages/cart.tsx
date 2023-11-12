@@ -1,7 +1,7 @@
 import CartSkeleton from '@/src/Skeleton/CartSkeleton';
 import IService from '@/src/interfaces/service.interface';
 import UserLayout from '@/src/layout/UserLayout';
-import { setItem } from '@/src/utils/useLocalStorage';
+import { removeItem, setItem } from '@/src/utils/useLocalStorage';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
@@ -20,7 +20,7 @@ export default function cart() {
         : 0;
     const removeAllFromCart = () => {
         setServiceData([]);
-        setItem("service", serviceData)
+        removeItem("service")
     };
     const removeOneFromCart = (id: Number) => {
         const removedItem = serviceData?.filter((s: IService) => s.id !== id);
