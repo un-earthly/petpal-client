@@ -132,7 +132,7 @@ export default function Home() {
             <p className="py-6">
               Your trusted source for all things pets. Whether you have a furry friend, a feathery companion, or a scaly buddy, were here to provide you with the best pet care information and services.
             </p>
-            <Link href="/services" className="btn btn-accent">Explore Services</Link>
+            <Link href="/services" className="btn btn-accent rounded-full">Explore Services</Link>
           </div>
         </div>
       </div>
